@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {Link} from 'react-router-dom';
+import {AuthContext} from '../../contexts/auth'
 
 
 export default function SignUp(){
@@ -8,8 +9,15 @@ export default function SignUp(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('')
 
-    function handleSubmit(){
-        alert('Clicou')
+    const {signUp} = useContext(AuthContext)
+
+    function handleSubmit(e){
+        e.preventDefault();
+
+        if(name !== '' && email !== '' && password !== ''){
+            signUp(email, password, name)
+        }
+
     }
 
     return(

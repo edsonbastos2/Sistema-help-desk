@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
+import logo from '../../assets/logo.png';
 import './signIn.css';
 
 
@@ -16,7 +17,7 @@ export default function SignIn(){
         <div className="container-area">
             <div className="login">
                 <div className="logo-area">
-                    <img src="" alt="Logo sistema"/>
+                    <img src={logo} alt="Logo sistema"/>
                 </div>
 
                 <form onSubmit={handleSubmit}>
