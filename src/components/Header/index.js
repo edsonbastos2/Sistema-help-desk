@@ -26,7 +26,7 @@ export default function Header(){
                 <FiSettings color="#FFF" size={24}/>
                 Configurações
             </Link>
-            <Link to="/stock">
+            <Link to="/inventario">
                 <FiPackage color="#FFF" size={24}/>
                 Estoque
             </Link>

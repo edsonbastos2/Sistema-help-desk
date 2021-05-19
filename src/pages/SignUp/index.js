@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import {Link} from 'react-router-dom';
-import {AuthContext} from '../../contexts/auth'
+import {AuthContext} from '../../contexts/auth';
+import logo from '../../assets/logoSingular.png';
 
 
 export default function SignUp(){
@@ -24,7 +25,7 @@ export default function SignUp(){
         <div className="container-area">
             <div className="login">
                 <div className="logo-area">
-                    <img src="" alt="Logo sistema"/>
+                    <img src={logo} alt="Logo sistema"/>
                 </div>
 
                 <form onSubmit={handleSubmit}>

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import {AuthContext } from '../../contexts/auth'
 import {Link} from 'react-router-dom';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logoSingular.png';
 import './signIn.css';
 
 
