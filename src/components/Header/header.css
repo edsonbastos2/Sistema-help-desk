@@ -1,81 +1,89 @@
-.sidebar{
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    background-color: #47b453;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #47b453;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
 }
 
-.sidebar div{
-    background: url(../../assets/cover.png);
-    background-color: #47b453;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 150px;
+.sidebar div {
+  background: url(../../assets/cover.png);
+  background-color: #47b453;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 150px;
 }
 
-.sidebar div{
-    padding-top: 30px;
+.sidebar div {
+  padding-top: 30px;
 }
 
-.sidebar div img{
-    border-radius: 50%;
-    display: block;
-    margin: auto;
-    width: 90px;
-    height: 90px;
-    -webkit-filter:drop-shadow(2px 3px 5px #47b453);
-    filter: drop-shadow(2px 3px 5px #47b453);
-    object-fit: cover;
+.sidebar div img {
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+  width: 90px;
+  height: 90px;
+  -webkit-filter: drop-shadow(2px 3px 5px #47b453);
+  filter: drop-shadow(2px 3px 5px #47b453);
+  object-fit: cover;
 }
 
-.sidebar a{
-    display: block;
-    color: rgba(0, 0, 0, 0.8);
-    font-weight: bold;
-    font-size: 1.3em;
-    padding: 15px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    transition: ease-in-out .4s;
+.sidebar a {
+  display: block;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  font-size: 1.3em;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: ease-in-out 0.4s;
 }
 
-.sidebar a svg{
-    margin-right: .5em;
+.sidebar a svg {
+  margin-right: 0.5em;
 }
 
-.sidebar a:hover{
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
+.sidebar a:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+.content {
+  margin-left: 200px;
+  padding: 1px 16px;
 }
 
 @media screen and (max-width: 600px) {
-    .sidebar{
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
 
-    .sidebar a{
-        float: left;
-    }
+  div.content {
+    margin-left: 0;
+  }
 
-    .sidebar div{
-        display: none;
-    }
-    .sidebar a svg{
-        display: none;
-    }
+  .sidebar a {
+    float: left;
+  }
+
+  .sidebar div {
+    display: none;
+  }
+  .sidebar a svg {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 470px) {
-    
-    .sidebar a {
-        text-align: center;
-        font-size: 12px;
-    }
+  .sidebar a {
+    text-align: center;
+    font-size: 12px;
+  }
 }
