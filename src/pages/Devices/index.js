@@ -16,13 +16,12 @@ export default function Devices(){
     const [setor, setSetor] = useState('');
     const [owner, setOwner] = useState('');
     const [dataEntrada, setDataEntrada] = useState('');
-    const [dataSaida, setDataSaida] = useState('');
 
 
     async function handleCadastro(e){
         e.preventDefault()
 
-        if(name !== '' && manufacturer !== '' && model !== '' && serial !== '' && setor !== '' && owner !== '' && dataEntrada !== '' && dataSaida !== ''){
+        if(name !== '' && manufacturer !== '' && model !== '' && serial !== '' && setor !== '' && owner !== '' && dataEntrada !== ''){
 
             await firebase.firestore().collection('device')
             .add({
@@ -34,7 +33,6 @@ export default function Devices(){
                 location: setor,
                 owner: owner,
                 entry_date: dataEntrada,
-                departure_date: dataEntrada
             })
             .then(() => {
                 setName('')
@@ -45,7 +43,6 @@ export default function Devices(){
                 setSetor('')
                 setOwner('')
                 setDataEntrada('')
-                setDataSaida('')
                 
                 toast.info('Dispositivo cadastrado com sucesso!')
             })
@@ -60,70 +57,82 @@ export default function Devices(){
         <div>
             <Header/>
             <div className="content">
-                <Title title="Cadastro de Equipamantos">
+                <Title title="Cadastro de Equipamentos">
                     <FiPackage size={25}/>
                 </Title>
 
                 <div className="container">
-                    <form className="form-profile" onSubmit={handleCadastro}>
+                    <form  onSubmit={handleCadastro}>
+                        <div class="form-row">
 
-                        <div className="form-group">
-                            <label htmlFor="nome">Nome</label>
-                            <input 
-                                type="text" id="nome" 
-                                value={name} onChange={e => setName(e.target.value)} 
-                                placeholder="Nome do Dispositivo"/>
+                            <div class="form-group col-md-4">
+                                <label>Nome do equipamento</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    
+                                    placeholder="Nome do equipamento" value={name} onChange={e=> setName(e.target.value)}/>
+                            </div>
 
-                            <label htmlFor="fabri">Fabricante</label>
-                            <input 
-                                type="text" id="fabri" 
-                                value={manufacturer} onChange={e => setManufacturer(e.target.value)}
-                                placeholder="Fabricante do Dispositivo"/>
-                        </div>
-                        
-                        <div className="form-group">
-                        <label htmlFor="model">Modelo</label>
-                        <input 
-                            type="text" id="model" 
-                            value={model} onChange={e => setModel(e.target.value)} 
-                            placeholder="Modelo do Dispositivo"/>
-
-                        <label htmlFor="serie">Número de serie</label>
-                        <input 
-                            type="text" id="serie" value={serial} 
-                            onChange={e => setSerial(e.target.value)} 
-                            placeholder="Número de serie"/>
-                        </div>
-                        
-                        <div className="form-group">
-                            <label htmlFor="dispo">Tipo de dispositivo</label>
-                            <input 
-                                type="text" id="dispo" 
-                                value={device} onChange={e => setDevice(e.target.value)} placeholder="Tipo de Dispositivo"/>
-                            <label htmlFor="">Setor</label>
-                            <input 
-                                type="text" value={setor} 
-                                onChange={e => setSetor(e.target.value)} placeholder="Setor alocado"/>
+                            <div class="form-group col-md-4">
+                                <label>Fabricante</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    
+                                    placeholder="Fabricante" value={manufacturer} onChange={e => setManufacturer(e.target.value)}/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Modelo</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    
+                                    placeholder="Modelo" value={model} onChange={e => setModel(e.target.value)}/>
+                            </div>
                         </div>
 
-                        <div className="form-group">
-                            <label htmlFor="">Usuário</label>
-                            <input 
-                                type="text" value={owner} 
-                                onChange={e => setOwner(e.target.value)} placeholder="Usuário"/>
-                            <label htmlFor="">Data de entrada</label>
-                            <input 
-                                type="date" value={dataEntrada} 
-                                onChange={e => setDataEntrada(e.target.value)} placeholder="Data Entrada"/>
-                            <label htmlFor="">Data de saída</label>
-                            <input 
-                                type="date" value={dataSaida} 
-                                onChange={e => setDataSaida(e.target.value)} placeholder="Data Saída"/>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Setor alocado</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Setor alocado" value={setor} onChange={e => setSetor(e.target.value)}/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Número de serie</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Número de serie" value={serial} onChange={e => setSerial(e.target.value)}/>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Tipo do Dispositivo</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Tipo do Dispositivo" value={device} onChange={e => setDevice(e.target.value)}/>
+                            </div>
                         </div>
 
-                        <div className="form-group">
-                            <button type="submit">Cadastrar</button>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Usuário alocado</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    placeholder="Usuário alocado" value={owner} onChange={e => setOwner(e.target.value)}/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="date">Data</label>
+                                <input 
+                                    type="date" 
+                                    class="form-control" 
+                                    id="date" placeholder="Data" value={dataEntrada} onChange={e => setDataEntrada(e.target.value)}/>
+                            </div>
                         </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
                     </form>
                 </div>
             </div>

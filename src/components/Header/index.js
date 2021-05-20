@@ -2,7 +2,7 @@ import {useContext} from 'react';
 import {AuthContext} from '../../contexts/auth';
 import {Link} from 'react-router-dom';
 import avatar from '../../assets/avatar.png';
-import {FiHome, FiUser, FiSettings,FiPackage} from 'react-icons/fi';
+import {FiHome, FiUser, FiSettings,FiPackage,FiArchive} from 'react-icons/fi';
 import './header.css';
 
 export default function Header(){
@@ -27,8 +27,12 @@ export default function Header(){
                 Configurações
             </Link>
             <Link to="/inventario">
-                <FiPackage color="#FFF" size={24}/>
-                Estoque
+                <FiArchive color="#FFF" size={24}/>
+                Inventário
+            </Link>
+            <Link to="/stock">
+                <FiPackage color="#FFF" size={25}/>
+                Stock
             </Link>
         </div>
     )
