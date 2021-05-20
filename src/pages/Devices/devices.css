@@ -1,3 +1,23 @@
+.status {
+  display: flex;
+  align-items: center;
+}
+
+.statu-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status input[type='radio'] {
+  margin: 15px 0;
+}
+
+.statu-group label {
+  padding-left: 0.5em;
+  font-size: 1.3em;
+}
+
 /* .form-group {
   width: 100%;
   display: flex;

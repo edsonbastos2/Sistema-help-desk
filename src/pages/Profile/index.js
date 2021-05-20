@@ -118,16 +118,29 @@ export default function Profile(){
                                 <img src={avatarUrl} alt="Foto de perfi do usuário" width="250" height="250"/>
                             }
                         </label>
-
-                        <label htmlFor="name">Nome</label>
-                        <input type="text" value={name} onChange={e => setName(e.target.value)}/>
-                        <label htmlFor="email">E-mail</label>
-                        <input type="email" value={email} disabled={true}/>
-                        <button type="submit">Salvar</button>
+                        
+                        <div className="card">
+                            <h5 className="card-header">
+                                Editar Perfil
+                            </h5>
+                            <div className="card-body">
+                                <div className="form-group">
+                                    <label htmlFor="name">Nome</label>
+                                    <input className="form-control" type="text" value={name} onChange={e => setName(e.target.value)}/>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="email">E-mail</label>
+                                    <input className="form-control" type="email" value={email} disabled={true}/>
+                                </div>
+                            </div>
+    
+                            <div className="btn-group p-4" role="group" aria-label="">
+                                <button type="submit" className="btn btn-primary">Salva</button>
+                                <button className="btn btn-primary ml-2" onClick={() => signOut()}>Logout</button>
+                            </div>
+                        </div>
                     </form>
-                </div>
-                <div className="container logout">
-                    <button className="logout-btn" onClick={() => signOut()}>Sair</button>
+                    
                 </div>
             </div>
 

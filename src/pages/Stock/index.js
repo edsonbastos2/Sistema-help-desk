@@ -10,7 +10,7 @@ export default function Stock(){
     return(
         <div>
             <Header/>
-            <div className="content">
+            <div className="content stock">
                 <Title title="Tabela de Estoque">
                     <FiTrendingUp size={25}/>
                 </Title>

@@ -15,13 +15,18 @@ export default function Devices(){
     const [device, setDevice] = useState('');
     const [setor, setSetor] = useState('');
     const [owner, setOwner] = useState('');
+    const [status, setStatus] = useState('Ativo');
     const [dataEntrada, setDataEntrada] = useState('');
 
-
+    function handleOptionStatus(e){
+        setStatus(e.target.value)
+        console.log(e.target.value)
+    }
+    
     async function handleCadastro(e){
         e.preventDefault()
 
-        if(name !== '' && manufacturer !== '' && model !== '' && serial !== '' && setor !== '' && owner !== '' && dataEntrada !== ''){
+        if(name !== '' && manufacturer !== '' && model !== '' && serial !== '' && setor !== '' && owner !== '' && dataEntrada !== '' && status !== ''){
 
             await firebase.firestore().collection('device')
             .add({
@@ -32,7 +37,8 @@ export default function Devices(){
                 device_type: device,
                 location: setor,
                 owner: owner,
-                entry_date: dataEntrada,
+                created: dataEntrada,
+                status: status,
             })
             .then(() => {
                 setName('')
@@ -63,76 +69,99 @@ export default function Devices(){
 
                 <div className="container">
                     <form  onSubmit={handleCadastro}>
-                        <div class="form-row">
+                        <div className="form-row">
 
-                            <div class="form-group col-md-4">
+                            <div className="form-group col-md-4">
                                 <label>Nome do equipamento</label>
                                 <input 
                                     type="text" 
-                                    class="form-control" 
+                                    className="form-control" 
                                     
                                     placeholder="Nome do equipamento" value={name} onChange={e=> setName(e.target.value)}/>
                             </div>
 
-                            <div class="form-group col-md-4">
+                            <div className="form-group col-md-4">
                                 <label>Fabricante</label>
                                 <input 
                                     type="text" 
-                                    class="form-control" 
+                                    className="form-control" 
                                     
                                     placeholder="Fabricante" value={manufacturer} onChange={e => setManufacturer(e.target.value)}/>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div className="form-group col-md-4">
                                 <label>Modelo</label>
                                 <input 
                                     type="text" 
-                                    class="form-control" 
+                                    className="form-control" 
                                     
                                     placeholder="Modelo" value={model} onChange={e => setModel(e.target.value)}/>
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label>Setor alocado</label>
+                        <div className="form-row">
+                            <div className="form-group col-md-4">
+                                <label htmlFor="">Setor alocado</label>
                                 <input 
                                     type="text" 
-                                    class="form-control" 
+                                    className="form-control" 
                                     placeholder="Setor alocado" value={setor} onChange={e => setSetor(e.target.value)}/>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label>Número de serie</label>
+                            <div className="form-group col-md-4">
+                                <label htmlFor="">Número de serie</label>
                                 <input 
                                     type="text" 
-                                    class="form-control" 
+                                    className="form-control" 
                                     placeholder="Número de serie" value={serial} onChange={e => setSerial(e.target.value)}/>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label>Tipo do Dispositivo</label>
+                            <div className="form-group col-md-4">
+                                <label htmlFor="">Tipo do Dispositivo</label>
                                 <input 
                                     type="text" 
-                                    class="form-control" 
+                                    className="form-control" 
                                     placeholder="Tipo do Dispositivo" value={device} onChange={e => setDevice(e.target.value)}/>
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Usuário alocado</label>
+                        <div className="form-row">
+                            <div className="form-group col-md-6">
+                                <label htmlFor="">Usuário alocado</label>
                                 <input 
                                     type="text" 
-                                    class="form-control" 
+                                    className="form-control" 
                                     placeholder="Usuário alocado" value={owner} onChange={e => setOwner(e.target.value)}/>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="date">Data</label>
+                            <div className="form-group col-md-6">
+                                <label htmlFor="date">Data</label>
                                 <input 
                                     type="date" 
-                                    class="form-control" 
+                                    className="form-control" 
                                     id="date" placeholder="Data" value={dataEntrada} onChange={e => setDataEntrada(e.target.value)}/>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <div className="status">
+                            <div className="form-check form-check-inline statu-group">
+                                <input 
+                                    className="form-check-input" 
+                                    type="radio" name="status" 
+                                    id="inlineRadio1" value="Ativo" onChange={handleOptionStatus} checked={status === 'Ativo'}/>
+                                <label className="form-check-label" htmlFor="inlineRadio1">Ativo</label>
+                            </div>
+                            <div className="form-check form-check-inline statu-group">
+                                <input 
+                                    className="form-check-input" 
+                                    type="radio" name="status" 
+                                    id="inlineRadio2" value="Reserva" onChange={handleOptionStatus} checked={status === 'Reserva'}/>
+                                <label className="form-check-label" htmlFor="inlineRadio2">Reserva</label>
+                            </div>
+                            <div className="form-check form-check-inline statu-group">
+                                <input 
+                                    className="form-check-input" 
+                                    type="radio" name="status" 
+                                    id="inlineRadio3" value="Defeito" onChange={handleOptionStatus} checked={status === 'Defeito'}/>
+                                <label className="form-check-label" htmlFor="inlineRadio3">Defeito</label>
+                            </div>
+                        </div>
+                        <button type="submit" className="btn btn-primary">Cadastrar</button>
                     </form>
                 </div>
             </div>
