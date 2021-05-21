@@ -18,6 +18,11 @@
   font-size: 1.3em;
 }
 
+.form-detail {
+  height: 200px !important;
+  resize: none;
+}
+
 /* .form-group {
   width: 100%;
   display: flex;

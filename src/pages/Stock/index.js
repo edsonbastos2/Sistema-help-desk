@@ -6,6 +6,7 @@ import {FiSearch, FiEdit2} from 'react-icons/fi';
 import './stock.css';
 import { useEffect, useState } from 'react';
 import firebase from '../../services/firebaseConnection';
+import Modal from '../../components/Modal';
 
 const listRef = firebase.firestore().collection('device').orderBy('created', 'desc');
 
@@ -15,7 +16,9 @@ export default function Stock(){
     const [loading, setLoading] = useState(true)
     const [loadMore, setLoadMore] = useState(false)
     const [isEmpty, setIsEmpty] = useState(false)
-    const [lastDocs, setLastDocs] = useState()
+    const [lastDocs, setLastDocs] = useState();
+    const [showModal, setShowModal] = useState(false)
+    const [detail, setDetail] = useState('')
 
     useEffect(() =>{
         loadDevices()
@@ -50,6 +53,7 @@ export default function Stock(){
                     location: doc.data().location,
                     model: doc.data().model,
                     owner: doc.data().owner,
+                    detail:doc.data().detail,
                     serial_number: doc.data().serial_number,
                     status: doc.data().status
                 })
@@ -69,11 +73,18 @@ export default function Stock(){
 
 
    async function handleMore(){
+       setLoadMore(true)
         await listRef.startAfter(lastDocs).limit(5)
         .get()
         .then((snapshot => {
             updateState(snapshot)
         }))
+    }
+
+    function toggleModal(item){
+        setShowModal(!showModal);
+        setDetail(item);
+        console.log(item)
     }
 
     if(loading){
@@ -135,10 +146,12 @@ export default function Stock(){
                                         <td data-label="Data">{item.created}</td>
                                         <td data-label="Status">
                                             <span className="badge" 
-                                            style={{backgroundColor: item.status ? '#5cb85c' : '#ddd'}}>{item.status}</span>
+                                            style={{
+                                                backgroundColor: 
+                                                item.status === 'Ativo' ? '#5cb85c' : '#FF0000'}}>{item.status}</span>
                                         </td>
                                         <td data-label="Ações">
-                                            <button className="action" style={{backgroundColor: '#3583f6'}}>
+                                            <button className="action" style={{backgroundColor: '#3583f6'}} onClick={() => toggleModal(item)}>
                                                 <FiSearch color="#fff" size={17}/>
                                             </button>
                                             <button className="action" style={{backgroundColor: '#F6a935'}}>
@@ -157,6 +170,8 @@ export default function Stock(){
                 </>
 
             </div>
+            {showModal && <Modal conteudo={detail} close={toggleModal}/>}
+            
         </div>
     )
 }

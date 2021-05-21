@@ -16,6 +16,7 @@ export default function Devices(){
     const [setor, setSetor] = useState('');
     const [owner, setOwner] = useState('');
     const [status, setStatus] = useState('Ativo');
+    const [detail, setDetail] = useState('')
     const [dataEntrada, setDataEntrada] = useState('');
 
     function handleOptionStatus(e){
@@ -39,6 +40,7 @@ export default function Devices(){
                 owner: owner,
                 created: dataEntrada,
                 status: status,
+                detail: detail
             })
             .then(() => {
                 setName('')
@@ -49,6 +51,7 @@ export default function Devices(){
                 setSetor('')
                 setOwner('')
                 setDataEntrada('')
+                setDetail('')
                 
                 toast.info('Dispositivo cadastrado com sucesso!')
             })
@@ -161,7 +164,18 @@ export default function Devices(){
                                 <label className="form-check-label" htmlFor="inlineRadio3">Defeito</label>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">Cadastrar</button>
+
+                        <div className="form-group">
+                            <label htmlFor="detalhes">Detalhes do equipamento</label>
+                            <textarea 
+                                className="form-control form-detail"
+                                id="detalhes" cols="5" rows="5" 
+                                value={detail} onChange={e => setDetail(e.target.value)}></textarea>
+                        </div>
+
+                        <div className="form-group">
+                            <button type="submit" className="btn btn-primary">Cadastrar</button>
+                        </div>
                     </form>
                 </div>
             </div>
