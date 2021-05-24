@@ -6,6 +6,7 @@ import Dashboard from '../pages/Dashboard';
 import Devices from '../pages/Devices';
 import Profile from '../pages/Profile';
 import Stock from '../pages/Stock';
+import EditDevices from '../pages/EditDevices';
 
 export default function Routes(){
     return(
@@ -16,6 +17,7 @@ export default function Routes(){
             <Route exact path="/profile" component={Profile} isPrivate/>
             <Route exact path="/inventario" component={Devices} isPrivate/>
             <Route exact path="/stock" component={Stock} isPrivate/>
+            <Route exact path="/inventario/:id" component={EditDevices} isPrivate/>
         </Switch>
     )
 }
