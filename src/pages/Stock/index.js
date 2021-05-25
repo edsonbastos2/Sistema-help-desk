@@ -7,6 +7,8 @@ import './stock.css';
 import { useEffect, useState } from 'react';
 import firebase from '../../services/firebaseConnection';
 import Modal from '../../components/Modal';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const listRef = firebase.firestore().collection('device').orderBy('created', 'desc');
 
@@ -104,6 +106,12 @@ export default function Stock(){
         )
     }
 
+    function handleCreatePDF(){
+        const doc = new jsPDF();
+        doc.autoTable({ html: '#mytable' })
+        doc.save('table.pdf')
+    }
+
     return(
         <div>
             <Header/>
@@ -117,7 +125,7 @@ export default function Stock(){
                 </Link>
 
                 <>
-                    <table>
+                    <table id="mytable">
                         <thead>
                             <tr>
                                 <th scope="col">Nome</th>
@@ -167,6 +175,7 @@ export default function Stock(){
                     
                     {loadMore && <h3>Carregando dados...</h3>}
                     { !loadMore && !isEmpty && <button className="btn btn-success mt-4" onClick={handleMore}>Carregar mais</button>}
+                    <button className="btn btn-primary mt-4 ml-3" onClick={handleCreatePDF}>Gerar PDF</button>
                 </>
 
             </div>
