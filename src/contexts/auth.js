@@ -85,7 +85,12 @@ export default function AuthProvider({children}){
         })
         .catch(error => {
             console.log(error)
-            toast.error('Ops! algo deu errado')
+            if(error.code === 'auth/weak-password' ){
+                toast.error('Semha muito fraca!')
+
+            }else if(error.code === 'auth/email-already-in-use'){
+                toast.error('E-mail já existe')
+            }
             setLoadingAuth(false)
         })
     }

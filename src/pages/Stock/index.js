@@ -11,6 +11,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
 const listRef = firebase.firestore().collection('device').orderBy('created', 'desc');
+// const listFilter = firebase.firestore().collection('device');
 
 export default function Stock(){
 
@@ -83,6 +84,10 @@ export default function Stock(){
         }))
     }
 
+    // async function Filter(){
+    //     await listFilter.where('device_type', '==', )
+    // }
+
     function toggleModal(item){
         setShowModal(!showModal);
         setDetail(item);
@@ -108,7 +113,7 @@ export default function Stock(){
 
     function handleCreatePDF(){
         const doc = new jsPDF();
-        doc.autoTable({ html: '#mytable' })
+        doc.autoTable({ html: '#mytable'})
         doc.save('table.pdf')
     }
 
