@@ -10,8 +10,8 @@ import Modal from '../../components/Modal';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-const listRef = firebase.firestore().collection('device').orderBy('created', 'desc');
-// const listFilter = firebase.firestore().collection('device');
+const listRef = firebase.firestore().collection('device').orderBy('name', 'asc');
+const listFilter = firebase.firestore().collection('device');
 
 export default function Stock(){
 
@@ -22,10 +22,31 @@ export default function Stock(){
     const [lastDocs, setLastDocs] = useState();
     const [showModal, setShowModal] = useState(false)
     const [detail, setDetail] = useState('')
+    const [total, setTotal] = useState(0)
 
     useEffect(() =>{
         loadDevices()
     }, [])
+
+
+    useEffect(() => {
+        async function totalDevice(){
+            await firebase.firestore().collection('device')
+            .get()
+            .then((snapshot) => {
+                let listTotal = []
+                snapshot.forEach(item => {
+                    listTotal.push({
+                        ...item
+                    })
+                })
+
+                setTotal(listTotal)
+            })
+        }
+
+        totalDevice()
+    },[])
 
     async function loadDevices(){
         await listRef.limit(5)
@@ -94,6 +115,7 @@ export default function Stock(){
         console.log(item)
     }
 
+
     if(loading){
         return(
             <div>
@@ -117,6 +139,8 @@ export default function Stock(){
         doc.save('table.pdf')
     }
 
+    
+
     return(
         <div>
             <Header/>
@@ -130,6 +154,8 @@ export default function Stock(){
                 </Link>
 
                 <>
+                <span class="badge bg-info text-light p-2">Total de dispositivos: {total.length}</span>
+
                     <table id="mytable">
                         <thead>
                             <tr>
